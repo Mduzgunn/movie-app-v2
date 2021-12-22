@@ -20,7 +20,7 @@ data class Movie @JvmOverloads constructor(
         val isActive: Boolean,
 
         @field:ElementCollection(fetch = FetchType.EAGER)
-        val genresTypes: List<Genre>,
+        val genre: List<Genre>,
 
         @ManyToMany(fetch = FetchType.LAZY)
         @JoinTable(
@@ -40,5 +40,5 @@ data class Movie @JvmOverloads constructor(
 
 )
 enum class Genre {
-    COMEDY, DRAMA, HORROR, ROMANCE, FANTASY, ACTION, MYSTERY, SCI_FI, THRILLER
+    COMEDY, DRAMA, HORROR
 }

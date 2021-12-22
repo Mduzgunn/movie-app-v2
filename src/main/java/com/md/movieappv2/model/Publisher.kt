@@ -8,7 +8,6 @@ import javax.persistence.Id
 @Entity
 data class Publisher @JvmOverloads constructor(
         @Id
-     //   @Column(name = "publisher_id")
         @GeneratedValue(generator = "UUID")
         @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
         val id: String? = "",
