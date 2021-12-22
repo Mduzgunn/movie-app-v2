@@ -18,7 +18,7 @@ data class User @JvmOverloads constructor(
         val updatedDate: LocalDateTime = LocalDateTime.now(),
 
         @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = [CascadeType.ALL])
-        val comment: List<Review>,
+        val reviewList: List<Review>,
 
 )    {
         override fun equals(other: Any?): Boolean {

@@ -2,8 +2,10 @@ package com.md.movieappv2.dto.converter;
 
 import com.md.movieappv2.dto.ActorDto;
 import com.md.movieappv2.dto.MovieDto;
+import com.md.movieappv2.dto.UserDto;
 import com.md.movieappv2.model.Actor;
 import com.md.movieappv2.model.Movie;
+import com.md.movieappv2.model.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -37,6 +39,13 @@ public class ActorDtoConverter {
                         m.getCreationDate(),
                         m.getUpdatedDate(),
                         m.isActive()))
+                .collect(Collectors.toList());
+    }
+
+    public List<ActorDto> convertToActorDtoList(List<Actor> actorList) {
+        return actorList
+                .stream()
+                .map(this::convert)
                 .collect(Collectors.toList());
     }
 }

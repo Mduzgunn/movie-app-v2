@@ -1,4 +1,9 @@
 package com.md.movieappv2.dto.request
 
-class CreateDirectorRequest {
-}
+import javax.validation.constraints.NotBlank
+
+data class CreateDirectorRequest(
+        @field:NotBlank
+        val name: String,
+        val lastname: String
+)
