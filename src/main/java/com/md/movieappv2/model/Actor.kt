@@ -6,6 +6,7 @@ import javax.persistence.*
 @Entity
 data class Actor @JvmOverloads constructor(
         @Id
+        @Column(name = "actor_id")
         @GeneratedValue(generator = "UUID")
         @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
         val id: String? = "",

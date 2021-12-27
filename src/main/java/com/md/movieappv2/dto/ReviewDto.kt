@@ -1,5 +1,6 @@
 package com.md.movieappv2.dto
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import java.time.LocalDateTime
 
 data class ReviewDto @JvmOverloads constructor(
@@ -8,6 +9,7 @@ data class ReviewDto @JvmOverloads constructor(
         val rate: Double,
         val creationDate: LocalDateTime,
 
-        val user: UserDto,
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        val user: UserDto?=null,
 
         )

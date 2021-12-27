@@ -7,6 +7,7 @@ import javax.persistence.*
 @Entity
 data class Movie @JvmOverloads constructor(
         @Id
+        @Column(name = "movie_id")
         @GeneratedValue(generator = "UUID")
         @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
         val id: String? = "",
@@ -36,9 +37,27 @@ data class Movie @JvmOverloads constructor(
 
         @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
         @JoinColumn(name = "publisher_id", referencedColumnName = "publisher_id")
-        val publisher: Publisher
+        val publisher: Publisher,
+
+
+        @OneToMany
+        @JoinTable(
+                name="review_movies",
+                joinColumns = [JoinColumn(name = "movie_id", referencedColumnName = "movie_id")],
+                inverseJoinColumns = [JoinColumn(name = "review_id", referencedColumnName = "review_id")]
+        )
+        val reviews: List<Review>? = ArrayList(),
+
+        @ManyToMany(fetch = FetchType.LAZY)
+        @JoinTable(
+                name = "language_movies",
+                joinColumns = [JoinColumn(name = "movie_id", referencedColumnName = "movie_id")],
+                inverseJoinColumns = [JoinColumn(name = "language_id", referencedColumnName = "language_id")]
+        )
+        val languages: List<Language>,
 
 )
+
 enum class Genre {
     COMEDY, DRAMA, HORROR
 }

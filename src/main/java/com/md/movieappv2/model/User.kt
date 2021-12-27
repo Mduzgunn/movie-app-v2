@@ -5,10 +5,11 @@ import org.hibernate.annotations.GenericGenerator
 import java.time.LocalDateTime
 import javax.persistence.*
 
-@Entity
+@Entity(name = "users")
 @Table(name = "users")
 data class User @JvmOverloads constructor(
         @Id
+        @Column(name = "user_id")
         @GeneratedValue(generator = "UUID")
         @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
         val id: String? = "",
@@ -17,8 +18,8 @@ data class User @JvmOverloads constructor(
         val creationDate: LocalDateTime = LocalDateTime.now(),
         val updatedDate: LocalDateTime = LocalDateTime.now(),
 
-        @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = [CascadeType.ALL])
-        val reviewList: List<Review>,
+        @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = [CascadeType.ALL])
+        val review: List<Review>?=ArrayList(),
 
 )    {
         override fun equals(other: Any?): Boolean {

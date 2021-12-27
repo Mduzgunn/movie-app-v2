@@ -78,6 +78,11 @@
             <artifactId>kotlinx-serialization-json</artifactId>
             <version>${serialization.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

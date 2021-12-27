@@ -1,17 +1,19 @@
 package com.md.movieappv2.model
 
 import org.hibernate.annotations.GenericGenerator
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 data class Language @JvmOverloads constructor(
         @Id
+        @Column(name = "language_id")
         @GeneratedValue(generator = "UUID")
         @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
         val id: String? = "",
-        val name:String
+        val name:String,
+
+        @ManyToMany(mappedBy = "languages", fetch = FetchType.LAZY)
+        val movies: List<Movie>?
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

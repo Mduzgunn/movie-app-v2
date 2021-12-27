@@ -11,4 +11,6 @@ data class UserDto @JvmOverloads constructor(
         val creationDate: LocalDateTime?=null,
         @JsonInclude(JsonInclude.Include.NON_NULL)
         val updatedDate: LocalDateTime?=null,
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        val reviews: List<ReviewDto>?=ArrayList()
 )
