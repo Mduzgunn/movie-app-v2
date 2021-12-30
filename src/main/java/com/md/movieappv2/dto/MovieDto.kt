@@ -5,7 +5,7 @@ import com.md.movieappv2.model.Genre
 import java.time.LocalDateTime
 
 data class MovieDto @JvmOverloads constructor(
-        val id: String,
+        val id: String?,
         val name: String,
         val releaseYear: Int,
         val description: String,
@@ -20,5 +20,9 @@ data class MovieDto @JvmOverloads constructor(
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
         val director: DirectorDto?=null,
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
-        val publisher: PublisherDto?=null
+        val publisher: PublisherDto?=null,
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        val reviews: List<ReviewDto>?=ArrayList()
+//        val language: Language
+
 )

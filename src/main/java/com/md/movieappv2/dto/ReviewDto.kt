@@ -5,9 +5,10 @@ import java.time.LocalDateTime
 
 data class ReviewDto @JvmOverloads constructor(
         val id: String?,
-        val movieId: Int,
-        val rate: Double,
-        val creationDate: LocalDateTime,
+        val comment: String?,
+        val Stars: Int?,
+        val creationDate: LocalDateTime= LocalDateTime.now(),
+        val updatedDate: LocalDateTime= LocalDateTime.now(),
 
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
         val user: UserDto?=null,

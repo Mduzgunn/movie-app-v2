@@ -2,9 +2,11 @@ package com.md.movieappv2.dto.converter;
 
 import com.md.movieappv2.dto.ReviewDto;
 import com.md.movieappv2.dto.UserDto;
+import com.md.movieappv2.model.Review;
 import com.md.movieappv2.model.User;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,20 +19,19 @@ public class UserDtoConverter {
                 from.getUsername(),
                 from.getEmail(),
                 from.getCreationDate(),
-                from.getUpdatedDate()
+                from.getUpdatedDate(),
+                getReviewList(new ArrayList<>(from.getReview()))
         );
     }
 
-
-    public List<ReviewDto> getCommentList(List<ReviewDto> comments){
-        return comments.stream().map(
-                c -> new ReviewDto(
-                        c.getId(),
-                        c.getMovieId(),
-                        c.getRate(),
-                        c.getCreationDate()
-                )
-        ).collect(Collectors.toList());
+    public List<ReviewDto> getReviewList(List<Review> reviewList) {
+        return reviewList.stream()
+                .map(r -> new ReviewDto(
+                        r.getId(),
+                        r.getComment(),
+                        r.getStars()
+                ))
+                .collect(Collectors.toList());
     }
 
     public List<UserDto> convertToUserDtoList(List<User> userList) {

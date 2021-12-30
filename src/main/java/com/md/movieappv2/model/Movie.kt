@@ -16,9 +16,9 @@ data class Movie @JvmOverloads constructor(
         val description: String,
         val duration: Int,
         val media: String,
+        val isActive: Boolean,
         val creationDate: LocalDateTime = LocalDateTime.now(),
         val updatedDate: LocalDateTime = LocalDateTime.now(),
-        val isActive: Boolean,
 
         @field:ElementCollection(fetch = FetchType.EAGER)
         val genre: List<Genre>,
@@ -39,25 +39,32 @@ data class Movie @JvmOverloads constructor(
         @JoinColumn(name = "publisher_id", referencedColumnName = "publisher_id")
         val publisher: Publisher,
 
-
         @OneToMany
         @JoinTable(
-                name="review_movies",
+                name = "review_movies",
                 joinColumns = [JoinColumn(name = "movie_id", referencedColumnName = "movie_id")],
                 inverseJoinColumns = [JoinColumn(name = "review_id", referencedColumnName = "review_id")]
         )
-        val reviews: List<Review>? = ArrayList(),
+        val reviews: List<Review>?,
 
-        @ManyToMany(fetch = FetchType.LAZY)
-        @JoinTable(
-                name = "language_movies",
-                joinColumns = [JoinColumn(name = "movie_id", referencedColumnName = "movie_id")],
-                inverseJoinColumns = [JoinColumn(name = "language_id", referencedColumnName = "language_id")]
+
+        @field:ElementCollection(fetch = FetchType.EAGER)
+        val language: List<Language>
+//        @ManyToMany(fetch = FetchType.LAZY)
+//        @JoinTable(
+//                name = "language_movies",
+//                joinColumns = [JoinColumn(name = "movie_id", referencedColumnName = "movie_id")],
+//                inverseJoinColumns = [JoinColumn(name = "language_id", referencedColumnName = "language_id")]
+//        )
+//        val languages: List<Language>?,
+
+
         )
-        val languages: List<Language>,
-
-)
 
 enum class Genre {
     COMEDY, DRAMA, HORROR
 }
+enum class Language {
+        TR, DE, EN
+}
+
