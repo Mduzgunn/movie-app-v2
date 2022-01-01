@@ -3,6 +3,7 @@ package com.md.movieappv2.service;
 import com.md.movieappv2.dto.ActorDto;
 import com.md.movieappv2.dto.MovieDto;
 import com.md.movieappv2.dto.converter.ActorDtoConverter;
+import com.md.movieappv2.dto.request.CreateActorRequest;
 import com.md.movieappv2.exception.ActorNotFoundException;
 import com.md.movieappv2.exception.MovieNotFoundException;
 import com.md.movieappv2.model.Actor;
@@ -19,10 +20,13 @@ import java.util.stream.Collectors;
 public class ActorService {
     private final ActorRepository  actorRepository;
     private final ActorDtoConverter actorDtoConverter;
+    private final MovieService movieService;
 
-    public ActorService(ActorRepository actorRepository, ActorDtoConverter actorDtoConverter) {
+    public ActorService(ActorRepository actorRepository, ActorDtoConverter actorDtoConverter,
+                        MovieService movieService) {
         this.actorRepository = actorRepository;
         this.actorDtoConverter = actorDtoConverter;
+        this.movieService=movieService;
     }
 
     protected Actor findActorById(String id) {
@@ -58,7 +62,19 @@ public class ActorService {
     }
 
 
+    public ActorDto createActor(CreateActorRequest createActorRequest) {
+        Actor actor = new Actor(
+                createActorRequest.getFirstname(),
+                createActorRequest.getLastname()
+        );
+        return actorDtoConverter.convert(actorRepository.save(actor));
+    }
 
+    public String deleteActorById(String id) {
+        getActorById(id);
+        actorRepository.deleteById(id);
+        return "actor deleted successfully "+id;
+    }
 
 
 //    public List<ActorDto> getAllActorDtoList() {
