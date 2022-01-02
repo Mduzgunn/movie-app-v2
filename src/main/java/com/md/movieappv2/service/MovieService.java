@@ -5,18 +5,15 @@ import com.md.movieappv2.dto.converter.MovieDtoConverter;
 import com.md.movieappv2.dto.request.CreateMovieRequest;
 import com.md.movieappv2.dto.request.UpdateMovieRequest;
 import com.md.movieappv2.exception.MovieNotFoundException;
-import com.md.movieappv2.model.Actor;
-import com.md.movieappv2.model.Director;
-import com.md.movieappv2.model.Movie;
-import com.md.movieappv2.model.Publisher;
+import com.md.movieappv2.model.*;
 import com.md.movieappv2.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Objects;
+
 
 @Service
 public class MovieService {
@@ -28,7 +25,7 @@ public class MovieService {
     private final ReviewService reviewService;
     private final UserService userService;
 
-    public MovieService(ActorService actorService, DirectorService directorService,PublisherService publisherService,
+    public MovieService(ActorService actorService, DirectorService directorService, PublisherService publisherService,
                         MovieRepository movieRepository, MovieDtoConverter movieDtoConverter,
                         ReviewService reviewService, UserService userService) {
         this.actorService = actorService;
@@ -47,7 +44,7 @@ public class MovieService {
     }
 
     protected List<Movie> getAllMovies() {
-        return movieRepository  .findAll();
+        return movieRepository.findAll();
     }
 
     public MovieDto getMovieById(String id) {
@@ -58,24 +55,11 @@ public class MovieService {
         return movieDtoConverter.convertToMovieDtoList(getAllMovies());
     }
 
-    public MovieDto createMovie(CreateMovieRequest createMovieRequest) {
-///genre language
-        List<Actor> actorList = new ArrayList<>(actorService.getActorList(createMovieRequest.getActors()));
-        Director director = directorService.findDirectorById(createMovieRequest.getDirector());
-        Publisher publisher = publisherService.findPublisherById(createMovieRequest.getPublisher());
-        Movie movie = new Movie(
-                createMovieRequest.getName(),
-createMovieRequest.getReleaseYear(),
-createMovieRequest.getDescription(),
-createMovieRequest.getDuration(),
-createMovieRequest.getMedia(),
-createMovieRequest.isActive(),
-createMovieRequest.getGenre(),
-actorList,
-director,
-publisher,
-review
-
+//    public MovieDto createMovie(CreateMovieRequest createMovieRequest) {
+//        List<Actor> actorList = new ArrayList<>(actorService.getActorList(createMovieRequest.getActors()));
+//        Director director = directorService.findDirectorById(createMovieRequest.getDirector());
+//        Publisher publisher = publisherService.findPublisherById(createMovieRequest.getPublisher());
+//        Movie movie = new Movie(
 //                createMovieRequest.getName(),
 //                createMovieRequest.getReleaseYear(),
 //                createMovieRequest.getDescription(),
@@ -85,14 +69,13 @@ review
 //                createMovieRequest.getGenre(),
 //                actorList,
 //                director,
-//                publisher,
-//                createMovieRequest.getLanguage()
+//                publisher
+//
+//        );
+//        return movieDtoConverter.convert(movieRepository.save(movie));
+//    }
 
-                );
-        return movieDtoConverter.convert(movieRepository.save(movie));
-    }
-
-    public MovieDto updateMovie (String id, UpdateMovieRequest updateMovieRequest) {
+    public MovieDto updateMovie(String id, UpdateMovieRequest updateMovieRequest) {
         Movie movie = findMovieById(id);
 
         Movie updatedMovie = new Movie(
@@ -103,17 +86,23 @@ review
                 movie.getDuration(),
                 updateMovieRequest.getMedia(),
                 updateMovieRequest.isActive(),
+                movie.getGenre(),
                 movie.getCreationDate(),
                 movie.getUpdatedDate(),
-                movie.getGenre(),
                 movie.getActors(),
                 movie.getDirector(),
-                updateMovieRequest.getPublisher(),
+                Objects.requireNonNull(updateMovieRequest.getPublisher()),
                 movie.getReviews(),
                 movie.getLanguage()
 
-                );
+        );
         return movieDtoConverter.convert(movieRepository.save(updatedMovie));
+    }
+
+    public String deleteMovieById(String id) {
+        getMovieById(id);
+        movieRepository.deleteById(id);
+        return "movie deleted successfully "+id;
     }
 
 }

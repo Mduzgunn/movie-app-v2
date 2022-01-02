@@ -33,7 +33,8 @@ public class MovieDtoConverter {
                         from.getDirector().getLastName()),
                 new PublisherDto(from.getId(),
                         from.getName()),
-                getReviewList(new ArrayList<>(from.getReviews()))
+                getReviewList(new ArrayList<>(from.getReviews())),
+                from.getLanguage()
 
 
                 );

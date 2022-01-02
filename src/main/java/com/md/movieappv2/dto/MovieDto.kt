@@ -2,6 +2,7 @@ package com.md.movieappv2.dto
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.md.movieappv2.model.Genre
+import com.md.movieappv2.model.Language
 import java.time.LocalDateTime
 
 data class MovieDto @JvmOverloads constructor(
@@ -11,7 +12,7 @@ data class MovieDto @JvmOverloads constructor(
         val description: String,
         val duration: Int,
         val media: String,
-        val genre: List<Genre>,
+        val genre: Genre,
         val creationDate: LocalDateTime = LocalDateTime.now(),
         val updatedDate: LocalDateTime = LocalDateTime.now(),
         val isActive: Boolean,
@@ -22,7 +23,7 @@ data class MovieDto @JvmOverloads constructor(
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
         val publisher: PublisherDto?=null,
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
-        val reviews: List<ReviewDto>?=ArrayList()
-//        val language: Language
+        val reviews: List<ReviewDto>?=ArrayList(),
+        val language: Language?
 
 )

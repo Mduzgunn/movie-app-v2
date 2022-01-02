@@ -6,6 +6,16 @@ import javax.persistence.*
 
 @Entity
 data class Movie @JvmOverloads constructor(
+//        name: String,
+//        releaseYear: Int,
+//        description: String,
+//        duration: Int,
+//        media: String,
+//        active: Boolean,
+//        genre: Genre,
+//        actorList: MutableList<Actor>,
+//        director: Director,
+//        publisher: Publisher
         @Id
         @Column(name = "movie_id")
         @GeneratedValue(generator = "UUID")
@@ -17,11 +27,10 @@ data class Movie @JvmOverloads constructor(
         val duration: Int,
         val media: String,
         val isActive: Boolean,
+        val genre: Genre,
         val creationDate: LocalDateTime = LocalDateTime.now(),
         val updatedDate: LocalDateTime = LocalDateTime.now(),
 
-        @field:ElementCollection(fetch = FetchType.EAGER)
-        val genre: List<Genre>,
 
         @ManyToMany(fetch = FetchType.LAZY)
         @JoinTable(
@@ -48,8 +57,7 @@ data class Movie @JvmOverloads constructor(
         val reviews: List<Review>?,
 
 
-        @field:ElementCollection(fetch = FetchType.EAGER)
-        val language: List<Language>
+        val language: Language
 //        @ManyToMany(fetch = FetchType.LAZY)
 //        @JoinTable(
 //                name = "language_movies",
@@ -60,7 +68,6 @@ data class Movie @JvmOverloads constructor(
 
 
         )
-
 enum class Genre {
     COMEDY, DRAMA, HORROR
 }

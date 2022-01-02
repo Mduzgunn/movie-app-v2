@@ -20,13 +20,10 @@ import java.util.stream.Collectors;
 public class ActorService {
     private final ActorRepository  actorRepository;
     private final ActorDtoConverter actorDtoConverter;
-    private final MovieService movieService;
 
-    public ActorService(ActorRepository actorRepository, ActorDtoConverter actorDtoConverter,
-                        MovieService movieService) {
+    public ActorService(ActorRepository actorRepository, ActorDtoConverter actorDtoConverter) {
         this.actorRepository = actorRepository;
         this.actorDtoConverter = actorDtoConverter;
-        this.movieService=movieService;
     }
 
     protected Actor findActorById(String id) {
