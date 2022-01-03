@@ -14,7 +14,8 @@ data class Actor @JvmOverloads constructor(
         val lastName:String,
 
         @ManyToMany(mappedBy = "actors", fetch = FetchType.LAZY)
-        val movies: List<Movie>?=ArrayList()
+        val movies: Set<Movie>? = HashSet()
+
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

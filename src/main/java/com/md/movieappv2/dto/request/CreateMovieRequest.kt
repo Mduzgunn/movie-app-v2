@@ -15,7 +15,6 @@ data class CreateMovieRequest (
         val releaseYear: Int?,
         @field:NotBlank
         val description: String?,
-        @field:NotBlank
         val duration: Int?,
         val media: String?,
         val isActive: Boolean?,
@@ -31,5 +30,4 @@ data class CreateMovieRequest (
         val publisher: String?,
         @field:Enumerated(EnumType.STRING)
         val language: Language?
-        ///LANGUAge ??
         )

@@ -13,4 +13,6 @@ data class ReviewDto @JvmOverloads constructor(
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
         val user: UserDto?=null,
 
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        val movie: MovieDto?=null,
         )

@@ -10,9 +10,8 @@ import com.md.movieappv2.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -55,25 +54,29 @@ public class MovieService {
         return movieDtoConverter.convertToMovieDtoList(getAllMovies());
     }
 
-//    public MovieDto createMovie(CreateMovieRequest createMovieRequest) {
-//        List<Actor> actorList = new ArrayList<>(actorService.getActorList(createMovieRequest.getActors()));
-//        Director director = directorService.findDirectorById(createMovieRequest.getDirector());
-//        Publisher publisher = publisherService.findPublisherById(createMovieRequest.getPublisher());
-//        Movie movie = new Movie(
-//                createMovieRequest.getName(),
-//                createMovieRequest.getReleaseYear(),
-//                createMovieRequest.getDescription(),
-//                createMovieRequest.getDuration(),
-//                createMovieRequest.getMedia(),
-//                createMovieRequest.isActive(),
-//                createMovieRequest.getGenre(),
-//                actorList,
-//                director,
-//                publisher
-//
-//        );
-//        return movieDtoConverter.convert(movieRepository.save(movie));
-//    }
+    public MovieDto createMovie(CreateMovieRequest createMovieRequest) {
+        Set<Actor> actorList = new HashSet<>(actorService.getActorList(createMovieRequest.getActors()));
+        Director director = directorService.findDirectorById(createMovieRequest.getDirector());
+        Publisher publisher = publisherService.findPublisherById(createMovieRequest.getPublisher());
+
+        Movie movie = new Movie(
+                createMovieRequest.getName(),
+                createMovieRequest.getReleaseYear(),
+                createMovieRequest.getDescription(),
+                createMovieRequest.getDuration(),
+                createMovieRequest.getMedia(),
+                createMovieRequest.isActive(),
+                createMovieRequest.getGenre(),
+                actorList,
+                director,
+
+                publisher,
+                Collections.emptyList(),
+                createMovieRequest.getLanguage()
+
+        );
+        return movieDtoConverter.convert(movieRepository.save(movie));
+    }
 
     public MovieDto updateMovie(String id, UpdateMovieRequest updateMovieRequest) {
         Movie movie = findMovieById(id);

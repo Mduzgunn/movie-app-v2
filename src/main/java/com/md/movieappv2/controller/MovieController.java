@@ -20,10 +20,11 @@ public class MovieController {
         this.movieService=movieService;
     }
 
-//    @PostMapping
-//    public ResponseEntity<MovieDto> createMovie(@Valid @RequestBody CreateMovieRequest createMovieRequest) {
-//        return ResponseEntity.ok(movieService.createMovie(createMovieRequest));
-//    }
+    @PostMapping
+    public ResponseEntity<MovieDto> createMovie(@Valid @RequestBody CreateMovieRequest createMovieRequest) {
+        return ResponseEntity.ok(movieService.createMovie(createMovieRequest));
+    }
+
 
     @GetMapping
     public ResponseEntity<List<MovieDto>> getMovies() {

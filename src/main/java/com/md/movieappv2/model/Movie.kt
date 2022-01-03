@@ -6,16 +6,7 @@ import javax.persistence.*
 
 @Entity
 data class Movie @JvmOverloads constructor(
-//        name: String,
-//        releaseYear: Int,
-//        description: String,
-//        duration: Int,
-//        media: String,
-//        active: Boolean,
-//        genre: Genre,
-//        actorList: MutableList<Actor>,
-//        director: Director,
-//        publisher: Publisher
+
         @Id
         @Column(name = "movie_id")
         @GeneratedValue(generator = "UUID")
@@ -38,7 +29,7 @@ data class Movie @JvmOverloads constructor(
                 joinColumns = [JoinColumn(name = "movie_id", referencedColumnName = "movie_id")],
                 inverseJoinColumns = [JoinColumn(name = "actor_id", referencedColumnName = "actor_id")]
         )
-        val actors: List<Actor>,
+        val actors: Set<Actor>,
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "director_id", referencedColumnName = "director_id")
@@ -47,6 +38,8 @@ data class Movie @JvmOverloads constructor(
         @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
         @JoinColumn(name = "publisher_id", referencedColumnName = "publisher_id")
         val publisher: Publisher,
+
+        // @OneToMany(mappedBy = "movie", fetch = FetchType.LAZY,cascade = [CascadeType.ALL])
 
         @OneToMany
         @JoinTable(
@@ -67,11 +60,13 @@ data class Movie @JvmOverloads constructor(
 //        val languages: List<Language>?,
 
 
-        )
+)
+
 enum class Genre {
     COMEDY, DRAMA, HORROR
 }
+
 enum class Language {
-        TR, DE, EN
+    TR, DE, EN
 }
 
