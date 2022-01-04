@@ -15,25 +15,25 @@ data class Actor @JvmOverloads constructor(
 
         @ManyToMany(mappedBy = "actors", fetch = FetchType.LAZY)
         val movies: Set<Movie>? = HashSet()
-
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as Actor
-
-        if (id != other.id) return false
-        if (firstName != other.firstName) return false
-        if (lastName != other.lastName) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = id?.hashCode() ?: 0
-        result = 31 * result + firstName.hashCode()
-        result = 31 * result + lastName.hashCode()
-        return result
-    }
-}
+)
+// {
+//    override fun equals(other: Any?): Boolean {
+//        if (this === other) return true
+//        if (javaClass != other?.javaClass) return false
+//
+//        other as Actor
+//
+//        if (id != other.id) return false
+//        if (firstName != other.firstName) return false
+//        if (lastName != other.lastName) return false
+//
+//        return true
+//    }
+//
+//    override fun hashCode(): Int {
+//        var result = id?.hashCode() ?: 0
+//        result = 31 * result + firstName.hashCode()
+//        result = 31 * result + lastName.hashCode()
+//        return result
+//    }
+//}

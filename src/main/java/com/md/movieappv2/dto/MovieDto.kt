@@ -12,19 +12,20 @@ data class MovieDto @JvmOverloads constructor(
         val description: String,
         val duration: Int,
         val media: String,
-        val genre: Genre,
+        val genre: List<Genre>,
         val creationDate: LocalDateTime = LocalDateTime.now(),
         val updatedDate: LocalDateTime = LocalDateTime.now(),
         val isActive: Boolean,
-//        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
         val actors: List<ActorDto>? = ArrayList(),
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
         val director: DirectorDto?=null,
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
+//        val publisher: String?="",
         val publisher: PublisherDto?=null,
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
         val reviews: List<ReviewDto>?=ArrayList(),
-        val language: Language?
+        val language: List<Language>?
 
 
 

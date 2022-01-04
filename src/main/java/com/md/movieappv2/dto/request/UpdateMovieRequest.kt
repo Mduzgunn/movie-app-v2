@@ -6,5 +6,5 @@ data class UpdateMovieRequest(
 
         val media: String,
         val isActive: Boolean,
-        val publisher: Publisher?  //Sttringggg
+        val publisher: Publisher?
 )

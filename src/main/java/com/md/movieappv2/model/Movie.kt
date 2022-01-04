@@ -18,10 +18,10 @@ data class Movie @JvmOverloads constructor(
         val duration: Int,
         val media: String,
         val isActive: Boolean,
-        val genre: Genre,
+        @field:ElementCollection(fetch = FetchType.EAGER)
+        val genre: List<Genre>,
         val creationDate: LocalDateTime = LocalDateTime.now(),
         val updatedDate: LocalDateTime = LocalDateTime.now(),
-
 
         @ManyToMany(fetch = FetchType.LAZY)
         @JoinTable(
@@ -29,7 +29,7 @@ data class Movie @JvmOverloads constructor(
                 joinColumns = [JoinColumn(name = "movie_id", referencedColumnName = "movie_id")],
                 inverseJoinColumns = [JoinColumn(name = "actor_id", referencedColumnName = "actor_id")]
         )
-        val actors: Set<Actor>,
+        val actors: List<Actor>,
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "director_id", referencedColumnName = "director_id")
@@ -38,8 +38,6 @@ data class Movie @JvmOverloads constructor(
         @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
         @JoinColumn(name = "publisher_id", referencedColumnName = "publisher_id")
         val publisher: Publisher,
-
-        // @OneToMany(mappedBy = "movie", fetch = FetchType.LAZY,cascade = [CascadeType.ALL])
 
         @OneToMany
         @JoinTable(
@@ -50,9 +48,10 @@ data class Movie @JvmOverloads constructor(
         val reviews: List<Review>?,
 
 
-        val language: Language
+        @field:ElementCollection(fetch = FetchType.EAGER)
+        val language: List<Language>,
 
-)
+        )
 
 enum class Genre {
     COMEDY, DRAMA, HORROR

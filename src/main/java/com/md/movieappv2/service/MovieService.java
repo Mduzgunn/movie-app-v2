@@ -9,7 +9,6 @@ import com.md.movieappv2.model.*;
 import com.md.movieappv2.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -55,7 +54,7 @@ public class MovieService {
     }
 
     public MovieDto createMovie(CreateMovieRequest createMovieRequest) {
-        Set<Actor> actorList = new HashSet<>(actorService.getActorList(createMovieRequest.getActors()));
+        List<Actor> actorList = new ArrayList<>(actorService.getActorList(createMovieRequest.getActors()));
         Director director = directorService.findDirectorById(createMovieRequest.getDirector());
         Publisher publisher = publisherService.findPublisherById(createMovieRequest.getPublisher());
 
@@ -65,11 +64,10 @@ public class MovieService {
                 createMovieRequest.getDescription(),
                 createMovieRequest.getDuration(),
                 createMovieRequest.getMedia(),
-                createMovieRequest.isActive(),
+                createMovieRequest.getActive(),
                 createMovieRequest.getGenre(),
                 actorList,
                 director,
-
                 publisher,
                 Collections.emptyList(),
                 createMovieRequest.getLanguage()
