@@ -2,6 +2,7 @@ package com.md.movieappv2.service;
 
 import com.md.movieappv2.dto.DirectorDto;
 import com.md.movieappv2.dto.converter.DirectorDtoConverter;
+import com.md.movieappv2.dto.request.CreateDirectorRequest;
 import com.md.movieappv2.exception.DirectorNotFoundException;
 import com.md.movieappv2.model.Director;
 import com.md.movieappv2.repository.DirectorRepository;
@@ -27,6 +28,20 @@ public class DirectorService {
 
     protected List<Director> getAllDirectors() {
         return directorRepository.findAll();
+    }
+
+    public DirectorDto createDirector(CreateDirectorRequest createDirectorRequest) {
+        Director director = new Director(
+                createDirectorRequest.getName(),
+                createDirectorRequest.getLastname()
+        );
+        return directorDtoConverter.convert(directorRepository.save(director));
+    }
+
+    public String deleteDirectorById(String id) {
+        getDirectorById(id);
+        directorRepository.deleteById(id);
+        return "director deleted successfully "+id;
     }
 
     public DirectorDto getDirectorById(String id) {

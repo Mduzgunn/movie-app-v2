@@ -16,15 +16,15 @@ import java.util.List;
 public class MovieController {
 
     private final MovieService movieService;
-    public MovieController(MovieService movieService){
-        this.movieService=movieService;
+
+    public MovieController(MovieService movieService) {
+        this.movieService = movieService;
     }
 
     @PostMapping
     public ResponseEntity<MovieDto> createMovie(@Valid @RequestBody CreateMovieRequest createMovieRequest) {
         return ResponseEntity.ok(movieService.createMovie(createMovieRequest));
     }
-
 
     @GetMapping
     public ResponseEntity<List<MovieDto>> getMovies() {
@@ -33,7 +33,7 @@ public class MovieController {
     }
 
     @GetMapping("/(id)")
-    public ResponseEntity<MovieDto> getActorById(@PathVariable String id) {
+    public ResponseEntity<MovieDto> getMovieById(@PathVariable String id) {
         MovieDto movieDto = movieService.getMovieById(id);
         return ResponseEntity.ok(movieDto);
     }

@@ -51,14 +51,6 @@ data class Movie @JvmOverloads constructor(
 
 
         val language: Language
-//        @ManyToMany(fetch = FetchType.LAZY)
-//        @JoinTable(
-//                name = "language_movies",
-//                joinColumns = [JoinColumn(name = "movie_id", referencedColumnName = "movie_id")],
-//                inverseJoinColumns = [JoinColumn(name = "language_id", referencedColumnName = "language_id")]
-//        )
-//        val languages: List<Language>?,
-
 
 )
 
