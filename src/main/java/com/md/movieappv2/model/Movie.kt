@@ -19,9 +19,9 @@ data class Movie @JvmOverloads constructor(
         val media: String,
         val isActive: Boolean,
         @field:ElementCollection(fetch = FetchType.EAGER)
-        val genre: List<Genre>,
-        val creationDate: LocalDateTime = LocalDateTime.now(),
-        val updatedDate: LocalDateTime = LocalDateTime.now(),
+        val genre: List<Genre>?,
+        val creationDate: LocalDateTime? = LocalDateTime.now(),
+        val updatedDate: LocalDateTime? = LocalDateTime.now(),
 
         @ManyToMany(fetch = FetchType.LAZY)
         @JoinTable(
@@ -45,11 +45,13 @@ data class Movie @JvmOverloads constructor(
                 joinColumns = [JoinColumn(name = "movie_id", referencedColumnName = "movie_id")],
                 inverseJoinColumns = [JoinColumn(name = "review_id", referencedColumnName = "review_id")]
         )
-        val reviews: List<Review>?,
+        val reviews: List<Review>?=ArrayList(),
 
 
-        @field:ElementCollection(fetch = FetchType.EAGER)
-        val language: List<Language>,
+//        @field:ElementCollection(fetch = FetchType.EAGER)
+//        val language: List<Language>,
+
+
 
         )
 
@@ -57,7 +59,7 @@ enum class Genre {
     COMEDY, DRAMA, HORROR
 }
 
-enum class Language {
-    TR, DE, EN
-}
+//enum class Language {
+//    TR, DE, EN
+//}
 

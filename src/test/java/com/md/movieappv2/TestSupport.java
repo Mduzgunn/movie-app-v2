@@ -1,7 +1,6 @@
 package com.md.movieappv2;
 
-import com.md.movieappv2.dto.ActorDto;
-import com.md.movieappv2.dto.MovieDto;
+import com.md.movieappv2.dto.*;
 import com.md.movieappv2.dto.request.CreateMovieRequest;
 import com.md.movieappv2.dto.request.UpdateMovieRequest;
 import com.md.movieappv2.model.*;
@@ -15,7 +14,7 @@ import java.util.List;
 public class TestSupport {
 
     public Instant getCurrentInstant() {
-        String instantExpected = "2021-06-15T10:15:30Z";
+        String instantExpected = "2022-06-15T10:15:30Z";
         Clock clock = Clock.fixed(Instant.parse(instantExpected), Clock.systemDefaultZone().getZone());
         return Instant.now(clock);
     }
@@ -36,17 +35,15 @@ public class TestSupport {
                 List.of(Genre.COMEDY),
                 List.of("actorId1", "actorId2"),
                 "directorId",
-                "publisherId",
-                List.of(Language.EN));
+                "publisherId"
+//                List.of(Language.EN)
+        );
 
     }
 
     public Movie generateMovie() {
-        List<Actor> actor = generateActorList();
-//        Director director = generateDirector();
-//        Publisher publisher = generatePublisher();
-        List<Review> review = generateReviewList();
         return new Movie(
+                "",
                 "name",
                 2021,
                 "description",
@@ -54,59 +51,55 @@ public class TestSupport {
                 "media",
                 true,
                 List.of(Genre.DRAMA),
-                actor,
+                getLocalDateTime(),
+                List.of(generateActor()),
                 generateDirector(),
-                generatePublisher(),
-                review,
-                List.of(Language.EN)
-
+                generatePublisher()
+//                generateReview()
+//                List.of(Language.EN)
         );
     }
 
-//    public MovieDto generateMovieDto() {
-//        return new MovieDto(
-//
-//                Director director = generateDirector();
-//                Publisher publisher = generatePublisher();
-//                List<Review> review = generateReviewList();
-//                return new Movie(
-//                    "name",
-//                    2021,
-//                    "description",
-//                    111,
-//                    "media",
-//                    true,
-//                    List.of(Genre.DRAMA),
-////                    actor,
-//                    director,
-//                    publisher,
-//                    review,
-//                    List.of(Language.EN)
-//
-//        );
-//    }
+    public MovieDto generateMovieDto() {
+        ActorDto actorDto = generateActorDto();
+        return new MovieDto(
+                "id",
+                "name",
+                2021,
+                "description",
+                111,
+                "media",
+                List.of(Genre.HORROR),
+                getLocalDateTime(),
+                getLocalDateTime(),
+                true,
+                List.of(actorDto),
+                generateDirectorDto(),
+                generatePublisherDto(),
+                generateReviewDtoList()
+//                List.of(Language.EN)
+        );
+    }
 
-    public List<Movie> generateListMovie() {
+    public List<Movie> generateMovieList() {
         Movie user = generateMovie();
         return List.of(user);
     }
 
-//    public List<MovieDto> generateListsMovieDto() {
-//        MovieDto movieDto = generateMovieDto();
-//        return List.of(movieDto);
-//    }
-
-
-
-    public UpdateMovieRequest generateUpdateMovieRequest() {
-        Publisher publisher = generatePublisher();
-
-        return new UpdateMovieRequest(
-                "username",
-                true,
-                publisher
-        );
+    public List<MovieDto> generateMovieDtoList() {
+        return List.of(generateMovieDto());
     }
+
+
+//    public UpdateMovieRequest generateUpdateMovieRequest() {
+//        Publisher publisher = generatePublisher();
+//
+//        return new UpdateMovieRequest(
+//                "username",
+//                true,
+//                publisher
+//        );
+//    }
 
     public Movie generateUpdatedMovie(Movie from, UpdateMovieRequest updateMovieRequest) {
         return new Movie(
@@ -123,8 +116,8 @@ public class TestSupport {
                 from.getActors(),
                 from.getDirector(),
                 updateMovieRequest.getPublisher(),
-                from.getReviews(),
-                from.getLanguage()
+                from.getReviews()
+//                from.getLanguage()
         );
     }
 
@@ -133,7 +126,15 @@ public class TestSupport {
 
     public Publisher generatePublisher() {
         return new Publisher(
+                "publisherId",
                 "pub name"
+        );
+    }
+
+    public PublisherDto generatePublisherDto() {
+        return new PublisherDto(
+                "publisherId",
+                "publisher name"
         );
     }
 
@@ -141,6 +142,15 @@ public class TestSupport {
 
     public Director generateDirector() {
         return new Director(
+                "directorId",
+                "director name",
+                "director lastname"
+        );
+    }
+
+    public DirectorDto generateDirectorDto() {
+        return new DirectorDto(
+                "directorId",
                 "director name",
                 "director lastname"
         );
@@ -166,6 +176,22 @@ public class TestSupport {
         return List.of(generateReview());
     }
 
+    public ReviewDto generateReviewDto() {
+        UserDto userDto = generateUserDto();
+        return new ReviewDto(
+                "id",
+                "actor firstname",
+                3,
+                getLocalDateTime(),
+                getLocalDateTime(),
+                userDto
+        );
+    }
+
+    public List<ReviewDto> generateReviewDtoList() {
+        return List.of(generateReviewDto());
+    }
+
     //*** user
 
     public User generateUser() {
@@ -176,6 +202,21 @@ public class TestSupport {
         );
     }
 
+    public List<User> generateUserList() {
+        return List.of(generateUser());
+    }
+
+    public UserDto generateUserDto() {
+        return new UserDto(
+                "id",
+                "username",
+                "user mail"
+        );
+    }
+
+    public List<UserDto> generateUserDtoList() {
+        return List.of(generateUserDto());
+    }
 
     // ***actor
 
@@ -192,17 +233,19 @@ public class TestSupport {
     }
 
     public ActorDto generateActorDto() {
-        ActorDto actorDto = generateActorDto();
+//        List<MovieDto> movieDtos = Collections.singletonList(generateMovieDto());
+//        MovieDto movieDto = generateMovieDto();
         return new ActorDto(
                 "id",
                 "actor firstname",
-                "actor lastname",
-                Collections.emptyList()
+                "actor lastname"
+//                List.of(movieDto)
+
         );
     }
 
-    public List<ActorDto> generateActorDtoList() {
-        return List.of(generateActorDto());
-    }
+//    public List<ActorDto> generateActorDtoList() {
+//        return List.of(generateActorDto());
+//    }
 
 }

@@ -38,8 +38,8 @@ public class ActorDtoConverter {
                         m.getGenre(),
                         m.getCreationDate(),
                         m.getUpdatedDate(),
-                        m.isActive(),
-                        m.getLanguage()
+                        m.isActive()
+//                        m.getLanguage()
                 ))
                 .collect(Collectors.toList());
     }

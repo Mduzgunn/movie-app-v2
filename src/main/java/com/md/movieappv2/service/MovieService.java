@@ -68,10 +68,8 @@ public class MovieService {
                 createMovieRequest.getGenre(),
                 actorList,
                 director,
-                publisher,
-                Collections.emptyList(),
-                createMovieRequest.getLanguage()
-
+                publisher
+//                createMovieRequest.getLanguage()
         );
         return movieDtoConverter.convert(movieRepository.save(movie));
     }
@@ -93,8 +91,8 @@ public class MovieService {
                 movie.getActors(),
                 movie.getDirector(),
                 Objects.requireNonNull(updateMovieRequest.getPublisher()),
-                movie.getReviews(),
-                movie.getLanguage()
+                movie.getReviews()
+//                movie.getLanguage()
 
         );
         return movieDtoConverter.convert(movieRepository.save(updatedMovie));
