@@ -5,4 +5,4 @@ import javax.validation.constraints.NotBlank
 data class CreatePublisherRequest(
         @field:NotBlank
         val name: String
-)
+        )

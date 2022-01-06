@@ -79,7 +79,6 @@ class MovieServiceTest extends TestSupport {
         CreateMovieRequest movieRequest = generateCreateMovieRequest();
         Movie movie = generateMovie();
         MovieDto movieDto = generateMovieDto();
-//        List<Actor> actorList = generateActorList();
         Actor actor = generateActor();
         Director director = generateDirector();
         Publisher publisher = generatePublisher();
@@ -93,7 +92,7 @@ class MovieServiceTest extends TestSupport {
 
         assertEquals(movieDto,result);
 
-        verify(movieService).findMovieById("id");
+//        verify(movieService).findMovieById("id");
         verify(movieDtoConverter).convert(movieRepository.save(movie));
     }
 

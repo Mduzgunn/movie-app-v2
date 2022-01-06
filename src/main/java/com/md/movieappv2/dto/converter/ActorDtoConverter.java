@@ -1,8 +1,6 @@
 package com.md.movieappv2.dto.converter;
 
-import com.md.movieappv2.dto.ActorDto;
-import com.md.movieappv2.dto.MovieDto;
-import com.md.movieappv2.dto.UserDto;
+import com.md.movieappv2.dto.*;
 import com.md.movieappv2.model.Actor;
 import com.md.movieappv2.model.Movie;
 import com.md.movieappv2.model.User;
@@ -32,14 +30,10 @@ public class ActorDtoConverter {
                         m.getName(),
                         m.getReleaseYear(),
                         m.getDescription(),
-                        // getMovieDurationString(m.getDuration()),
                         m.getDuration(),
                         m.getMedia(),
-                        m.getGenre(),
-                        m.getCreationDate(),
-                        m.getUpdatedDate(),
-                        m.isActive()
-//                        m.getLanguage()
+                        m.isActive(),
+                        Objects.requireNonNull(m.getGenre())
                 ))
                 .collect(Collectors.toList());
     }

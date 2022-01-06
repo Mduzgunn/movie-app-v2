@@ -42,8 +42,11 @@ public class TestSupport {
     }
 
     public Movie generateMovie() {
+        Actor actor = generateActor();
+        Director director = generateDirector();
+        Publisher publisher = generatePublisher();
         return new Movie(
-                "",
+                "id",
                 "name",
                 2021,
                 "description",
@@ -52,9 +55,10 @@ public class TestSupport {
                 true,
                 List.of(Genre.DRAMA),
                 getLocalDateTime(),
-                List.of(generateActor()),
-                generateDirector(),
-                generatePublisher()
+                getLocalDateTime(),
+                List.of(actor),
+                director,
+                publisher
 //                generateReview()
 //                List.of(Language.EN)
         );
@@ -69,10 +73,10 @@ public class TestSupport {
                 "description",
                 111,
                 "media",
+                true,
                 List.of(Genre.HORROR),
                 getLocalDateTime(),
                 getLocalDateTime(),
-                true,
                 List.of(actorDto),
                 generateDirectorDto(),
                 generatePublisherDto(),
@@ -126,8 +130,9 @@ public class TestSupport {
 
     public Publisher generatePublisher() {
         return new Publisher(
+                "",
                 "publisherId",
-                "pub name"
+                generateMovie()
         );
     }
 
@@ -222,6 +227,7 @@ public class TestSupport {
 
     public Actor generateActor() {
         return new Actor(
+                "id",
                 "name",
                 "lastname"
 

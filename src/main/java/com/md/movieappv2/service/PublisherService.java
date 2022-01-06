@@ -20,14 +20,6 @@ public class PublisherService {
         this.publisherDtoConverter = publisherDtoConverter;
     }
 
-//    protected Publisher getPublisherById(String id) {
-//        return publisherRepository.findById(id)
-//                .orElseThrow(() -> {
-//                    logger.warn("Publisher not found with id " + id);
-//                    return new PublisherNotFoundException("Publisher not found id: " + id );
-//                });
-//    }
-
     protected Publisher findPublisherById(String id) {
         return publisherRepository
                 .findById(id)

@@ -14,7 +14,7 @@ data class Director @JvmOverloads constructor(
         val lastName: String,
 
         @OneToMany(mappedBy = "director", fetch = FetchType.LAZY)
-        val movies: Set<Movie>? = HashSet()
+        val movies: List<Movie>? = ArrayList()
 )  {
 
     override fun equals(other: Any?): Boolean {

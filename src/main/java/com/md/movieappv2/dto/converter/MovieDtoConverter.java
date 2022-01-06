@@ -22,10 +22,10 @@ public class MovieDtoConverter {
                 from.getDescription(),
                 from.getDuration(),
                 from.getMedia(),
-                from.getGenre(),
+                from.isActive(),
+                Objects.requireNonNull(from.getGenre()),
                 from.getCreationDate(),
                 from.getUpdatedDate(),
-                from.isActive(),
 
                 getActorList(new ArrayList<>(from.getActors())),
                 new DirectorDto(from.getDirector().getId(),
@@ -35,8 +35,6 @@ public class MovieDtoConverter {
                         from.getName()),
                 getReviewList(new ArrayList<>(from.getReviews()))
 //                from.getLanguage()
-
-
                 );
     }
     private List<ActorDto> getActorList(List<Actor> actorList) {

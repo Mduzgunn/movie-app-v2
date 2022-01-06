@@ -38,7 +38,7 @@ public class MovieService {
     protected Movie findMovieById(String id) {
         return movieRepository
                 .findById(id)
-                .orElseThrow(() -> new MovieNotFoundException("post not found " + id));
+                .orElseThrow(() -> new MovieNotFoundException("movie not found " + id));
     }
 
     protected List<Movie> getAllMovies() {
@@ -69,6 +69,7 @@ public class MovieService {
                 actorList,
                 director,
                 publisher
+
 //                createMovieRequest.getLanguage()
         );
         return movieDtoConverter.convert(movieRepository.save(movie));
