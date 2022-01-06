@@ -23,7 +23,6 @@ data class CreateMovieRequest (
         val actors: List<String>?,
         @field:NotNull
         val director: String?,
-        @field:NotNull
         val publisher: String?,
 //        @field:Enumerated(EnumType.STRING)
 //        val language: List<Language>?

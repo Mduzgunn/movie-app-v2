@@ -36,13 +36,12 @@ public class TestSupport {
                 List.of("actorId1", "actorId2"),
                 "directorId",
                 "publisherId"
-//                List.of(Language.EN)
         );
 
     }
 
     public Movie generateMovie() {
-        Actor actor = generateActor();
+//        Actor actor = generateActor();
         Director director = generateDirector();
         Publisher publisher = generatePublisher();
         return new Movie(
@@ -54,9 +53,9 @@ public class TestSupport {
                 "media",
                 true,
                 List.of(Genre.DRAMA),
-                getLocalDateTime(),
-                getLocalDateTime(),
-                List.of(actor),
+//                getLocalDateTime(),
+//                getLocalDateTime()
+//                List.of(actor),
                 director,
                 publisher
 //                generateReview()
@@ -79,7 +78,7 @@ public class TestSupport {
                 getLocalDateTime(),
                 List.of(actorDto),
                 generateDirectorDto(),
-                generatePublisherDto(),
+                "publisher",
                 generateReviewDtoList()
 //                List.of(Language.EN)
         );
@@ -131,8 +130,7 @@ public class TestSupport {
     public Publisher generatePublisher() {
         return new Publisher(
                 "",
-                "publisherId",
-                generateMovie()
+                "publisherId"
         );
     }
 
@@ -185,7 +183,7 @@ public class TestSupport {
         UserDto userDto = generateUserDto();
         return new ReviewDto(
                 "id",
-                "actor firstname",
+                "comment",
                 3,
                 getLocalDateTime(),
                 getLocalDateTime(),

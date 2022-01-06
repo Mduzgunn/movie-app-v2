@@ -92,7 +92,9 @@ class MovieServiceTest extends TestSupport {
 
         assertEquals(movieDto,result);
 
-//        verify(movieService).findMovieById("id");
+        verify(directorService).findDirectorById("directorId");
+        verify(publisherService).findPublisherById("publisherId");
+        verify(actorService).findActorById("id");
         verify(movieDtoConverter).convert(movieRepository.save(movie));
     }
 

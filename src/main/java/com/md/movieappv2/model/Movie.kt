@@ -29,14 +29,14 @@ data class Movie @JvmOverloads constructor(
                 joinColumns = [JoinColumn(name = "movie_id", referencedColumnName = "movie_id")],
                 inverseJoinColumns = [JoinColumn(name = "actor_id", referencedColumnName = "actor_id")]
         )
-        val actors: List<Actor>,
+        val actors: List<Actor>?=ArrayList(),
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "director_id", referencedColumnName = "director_id")
-        val director: Director,
+        val director: Director?,
 
         @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-        @JoinColumn(name = "publisher_id", referencedColumnName = "publisher_id")
+        @JoinColumn(name = "pub_id", referencedColumnName = "publisher_id")
         val publisher: Publisher,
 
         @OneToMany

@@ -1,10 +1,7 @@
 package com.md.movieappv2.dto.converter;
 
 import com.md.movieappv2.dto.*;
-import com.md.movieappv2.model.Actor;
-import com.md.movieappv2.model.Movie;
-import com.md.movieappv2.model.Review;
-import com.md.movieappv2.model.User;
+import com.md.movieappv2.model.*;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -31,8 +28,7 @@ public class MovieDtoConverter {
                 new DirectorDto(from.getDirector().getId(),
                         from.getDirector().getName(),
                         from.getDirector().getLastName()),
-                new PublisherDto(from.getId(),
-                        from.getName()),
+                from.getPublisher().getName(),
                 getReviewList(new ArrayList<>(from.getReviews()))
 //                from.getLanguage()
                 );
