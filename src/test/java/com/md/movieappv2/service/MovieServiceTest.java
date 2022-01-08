@@ -4,6 +4,7 @@ import com.md.movieappv2.TestSupport;
 import com.md.movieappv2.dto.MovieDto;
 import com.md.movieappv2.dto.converter.MovieDtoConverter;
 import com.md.movieappv2.dto.request.CreateMovieRequest;
+import com.md.movieappv2.dto.request.UpdateMovieRequest;
 import com.md.movieappv2.exception.DirectorNotFoundException;
 import com.md.movieappv2.exception.MovieNotFoundException;
 import com.md.movieappv2.model.*;
@@ -26,8 +27,6 @@ class MovieServiceTest extends TestSupport {
     private ActorService actorService;
     private DirectorService directorService;
     private PublisherService publisherService;
-    private ReviewService reviewService;
-    private UserService userService;
     private MovieService movieService;
 
     @BeforeEach
@@ -37,13 +36,11 @@ class MovieServiceTest extends TestSupport {
         actorService = mock(ActorService.class);
         directorService = mock(DirectorService.class);
         publisherService = mock(PublisherService.class);
-        reviewService = mock(ReviewService.class);
-        userService = mock(UserService.class);
+
 
         movieService = new MovieService(actorService, directorService, publisherService,
-                movieRepository, movieDtoConverter, reviewService, userService);
+                movieRepository, movieDtoConverter);
     }
-
 
     @Test
     void testGetMovieById_whenIdExist_shouldReturnMovieDto() {
@@ -72,8 +69,19 @@ class MovieServiceTest extends TestSupport {
     }
 
     @Test
-    void testGetAllMovieDtoList_shouldReturnListOfMovieDto() {
+    void testGetMovieDtoList_shouldReturnListOfMovieDto() {
+        List<Movie> movieList = generateMovieList();
+        List<MovieDto> movieDtoList = generateMovieDtoList();
 
+        when(movieRepository.findAll()).thenReturn(movieList);
+        when(movieDtoConverter.convertToMovieDtoList(movieList)).thenReturn(movieDtoList);
+
+        List<MovieDto> result = movieService.getAllMovieDtoList();
+
+        assertEquals(movieDtoList, result);
+
+        verify(movieRepository).findAll();
+        verify(movieDtoConverter).convertToMovieDtoList(movieList);
     }
 
     @Test
@@ -92,7 +100,7 @@ class MovieServiceTest extends TestSupport {
 
         MovieDto result = movieService.createMovie(movieRequest);
 
-        assertEquals(movieDto,result);
+        assertEquals(movieDto, result);
 
         verify(directorService).findDirectorById("directorId");
         verify(publisherService).findPublisherById("publisherId");
@@ -116,12 +124,20 @@ class MovieServiceTest extends TestSupport {
     }
 
     @Test
-    void testCreateMovie_whenPublisherIdExistAndDirectorIdNotExist_shouldThrowRuntimeException() {
-
-    }
-
-    @Test
     void testUpdateMovie_whenUpdateMovieRequest_itShouldReturnMovieDto() {
+        UpdateMovieRequest updateMovieRequest = generateUpdateMovieRequest();
+        Movie updatedMovie = generateUpdatedMovie(generateMovie(), updateMovieRequest);
+        MovieDto movieDto = generateMovieDto();
+
+        when(movieRepository.findById("id")).thenReturn(Optional.ofNullable(generateMovie()));
+        when(movieDtoConverter.convert(movieRepository.save(updatedMovie))).thenReturn(movieDto);
+
+        MovieDto result = movieService.updateMovie("id", updateMovieRequest);
+
+        assertEquals(movieDto, result);
+
+        verify(movieRepository).findById("id");
+        verify(movieDtoConverter).convert(movieRepository.save(updatedMovie));
     }
 
     @Test

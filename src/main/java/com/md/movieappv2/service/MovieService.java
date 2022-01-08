@@ -20,19 +20,15 @@ public class MovieService {
     private final ActorService actorService;
     private final DirectorService directorService;
     private final PublisherService publisherService;
-    private final ReviewService reviewService;
-    private final UserService userService;
 
     public MovieService(ActorService actorService, DirectorService directorService, PublisherService publisherService,
-                        MovieRepository movieRepository, MovieDtoConverter movieDtoConverter,
-                        ReviewService reviewService, UserService userService) {
+                        MovieRepository movieRepository, MovieDtoConverter movieDtoConverter) {
         this.actorService = actorService;
         this.movieRepository = movieRepository;
         this.movieDtoConverter = movieDtoConverter;
         this.directorService = directorService;
         this.publisherService = publisherService;
-        this.reviewService = reviewService;
-        this.userService = userService;
+
     }
 
     protected Movie findMovieById(String id) {
@@ -100,7 +96,7 @@ public class MovieService {
     public String deleteMovieById(String id) {
         getMovieById(id);
         movieRepository.deleteById(id);
-        return "movie deleted successfully "+id;
+        return "movie deleted successfully " + id;
     }
 
 }

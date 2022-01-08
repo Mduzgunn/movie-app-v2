@@ -85,15 +85,15 @@ public class TestSupport {
     }
 
 
-//    public UpdateMovieRequest generateUpdateMovieRequest() {
-//        Publisher publisher = generatePublisher();
-//
-//        return new UpdateMovieRequest(
-//                "username",
-//                true,
-//                publisher
-//        );
-//    }
+    public UpdateMovieRequest generateUpdateMovieRequest() {
+        Publisher publisher = generatePublisher();
+
+        return new UpdateMovieRequest(
+                "media",
+                true,
+                publisher
+        );
+    }
 
     public Movie generateUpdatedMovie(Movie from, UpdateMovieRequest updateMovieRequest) {
         return new Movie(
