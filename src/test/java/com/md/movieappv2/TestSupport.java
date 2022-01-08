@@ -8,7 +8,6 @@ import com.md.movieappv2.model.*;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 
 public class TestSupport {
@@ -33,19 +32,16 @@ public class TestSupport {
                 "media",
                 true,
                 List.of(Genre.COMEDY),
-                List.of("actorId1", "actorId2"),
+                List.of("actorId1"),
                 "directorId",
                 "publisherId"
         );
-
     }
 
     public Movie generateMovie() {
-//        Actor actor = generateActor();
         Director director = generateDirector();
         Publisher publisher = generatePublisher();
         return new Movie(
-                "id",
                 "name",
                 2021,
                 "description",
@@ -53,13 +49,9 @@ public class TestSupport {
                 "media",
                 true,
                 List.of(Genre.DRAMA),
-//                getLocalDateTime(),
-//                getLocalDateTime()
-//                List.of(actor),
+                List.of(generateActor()),
                 director,
                 publisher
-//                generateReview()
-//                List.of(Language.EN)
         );
     }
 
@@ -78,9 +70,8 @@ public class TestSupport {
                 getLocalDateTime(),
                 List.of(actorDto),
                 generateDirectorDto(),
-                "publisher",
+                generatePublisher().getName(),
                 generateReviewDtoList()
-//                List.of(Language.EN)
         );
     }
 
@@ -120,7 +111,6 @@ public class TestSupport {
                 from.getDirector(),
                 updateMovieRequest.getPublisher(),
                 from.getReviews()
-//                from.getLanguage()
         );
     }
 
@@ -129,8 +119,8 @@ public class TestSupport {
 
     public Publisher generatePublisher() {
         return new Publisher(
-                "",
-                "publisherId"
+                "publisherId",
+                "publisherName"
         );
     }
 
@@ -166,7 +156,7 @@ public class TestSupport {
         Movie movie = generateMovie();
         return new Review(
                 "id",
-                "yorum",
+                "comment",
                 4,
                 getLocalDateTime(),
                 getLocalDateTime(),
@@ -237,13 +227,10 @@ public class TestSupport {
     }
 
     public ActorDto generateActorDto() {
-//        List<MovieDto> movieDtos = Collections.singletonList(generateMovieDto());
-//        MovieDto movieDto = generateMovieDto();
         return new ActorDto(
                 "id",
                 "actor firstname",
                 "actor lastname"
-//                List.of(movieDto)
 
         );
     }

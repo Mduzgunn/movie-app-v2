@@ -54,9 +54,9 @@ public class MovieService {
     }
 
     public MovieDto createMovie(CreateMovieRequest createMovieRequest) {
-//        List<Actor> actorList = new ArrayList<>(actorService.getActorList(createMovieRequest.getActors()));
+        List<Actor> actorList = new ArrayList<>(actorService.getActorList(createMovieRequest.getActors()));
         Director director = directorService.findDirectorById(createMovieRequest.getDirector());
-        Publisher publisher = publisherService.findPublisherById(createMovieRequest.getPublisher());
+        Publisher publisher = publisherService.findPublisherById(createMovieRequest.getPublisherId());
 
         Movie movie = new Movie(
                 createMovieRequest.getName(),
@@ -66,11 +66,9 @@ public class MovieService {
                 createMovieRequest.getMedia(),
                 createMovieRequest.getActive(),
                 createMovieRequest.getGenre(),
-//                actorList,
+                actorList,
                 director,
                 publisher
-
-//                createMovieRequest.getLanguage()
         );
         return movieDtoConverter.convert(movieRepository.save(movie));
     }

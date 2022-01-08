@@ -20,10 +20,10 @@ data class CreateMovieRequest (
         val active: Boolean,
         @field:Enumerated(EnumType.STRING)
         val genre: List<Genre>?,
-        val actors: List<String>?,
+        val actors: List<String>,
         @field:NotNull
         val director: String?,
-        val publisher: String?,
+        val publisherId: String?,
 //        @field:Enumerated(EnumType.STRING)
 //        val language: List<Language>?
         )

@@ -4,12 +4,14 @@ import com.md.movieappv2.TestSupport;
 import com.md.movieappv2.dto.MovieDto;
 import com.md.movieappv2.dto.converter.MovieDtoConverter;
 import com.md.movieappv2.dto.request.CreateMovieRequest;
+import com.md.movieappv2.exception.DirectorNotFoundException;
 import com.md.movieappv2.exception.MovieNotFoundException;
 import com.md.movieappv2.model.*;
 import com.md.movieappv2.repository.MovieRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -94,7 +96,7 @@ class MovieServiceTest extends TestSupport {
 
         verify(directorService).findDirectorById("directorId");
         verify(publisherService).findPublisherById("publisherId");
-        verify(actorService).findActorById("id");
+        verify(actorService).getActorList(Collections.singletonList("actorId1"));
         verify(movieDtoConverter).convert(movieRepository.save(movie));
     }
 
@@ -102,14 +104,14 @@ class MovieServiceTest extends TestSupport {
     void testCreateMovie_whenPublisherIdNotExist_shouldThrowRuntimeException() {
         CreateMovieRequest movieRequest = generateCreateMovieRequest();
 
-        when(publisherService.getPublisherById("publisherId")).thenThrow(RuntimeException.class);
+        when(directorService.findDirectorById("directorId")).thenThrow(DirectorNotFoundException.class);
 
-        assertThrows(RuntimeException.class,
+        assertThrows(DirectorNotFoundException.class,
                 () -> movieService.createMovie(movieRequest));
 
-        verify(publisherService).findPublisherById("publisherId");
-//        Mockito.verifyNoInteractions(actorService);  create işlerim sırasında actor list publisherden önce kontrol edilir.
-//        Mockito.verifyNoInteractions(directorService);
+        verify(directorService).findDirectorById("directorId");
+        verifyNoInteractions(publisherService);
+        verifyNoInteractions(movieDtoConverter);
         verifyNoInteractions(movieRepository);
     }
 

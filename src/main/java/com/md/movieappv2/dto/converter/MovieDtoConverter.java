@@ -23,18 +23,18 @@ public class MovieDtoConverter {
                 Objects.requireNonNull(from.getGenre()),
                 from.getCreationDate(),
                 from.getUpdatedDate(),
-
                 getActorList(new ArrayList<>(from.getActors())),
                 new DirectorDto(from.getDirector().getId(),
                         from.getDirector().getName(),
                         from.getDirector().getLastName()),
+
+                // TODO - id?
                 from.getPublisher().getName(),
                 getReviewList(new ArrayList<>(from.getReviews()))
 //                from.getLanguage()
                 );
     }
     private List<ActorDto> getActorList(List<Actor> actorList) {
-
         return actorList.stream()
                 .map(a -> new ActorDto(
                         a.getId(),

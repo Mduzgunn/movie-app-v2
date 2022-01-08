@@ -20,7 +20,7 @@ data class MovieDto @JvmOverloads constructor(
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
         val director: DirectorDto?=null,
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
-        val publisher: String?=null,
+        val publisherName: String?="",
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
         val reviews: List<ReviewDto>?=ArrayList(),
 //        val language: List<Language>?
