@@ -2,23 +2,14 @@ package com.md.movieappv2.service;
 
 import com.md.movieappv2.TestSupport;
 import com.md.movieappv2.dto.ActorDto;
-import com.md.movieappv2.dto.MovieDto;
 import com.md.movieappv2.dto.converter.ActorDtoConverter;
 import com.md.movieappv2.dto.request.CreateActorRequest;
-import com.md.movieappv2.dto.request.CreateMovieRequest;
-import com.md.movieappv2.dto.request.UpdateMovieRequest;
 import com.md.movieappv2.exception.ActorNotFoundException;
-import com.md.movieappv2.exception.DirectorNotFoundException;
-import com.md.movieappv2.exception.MovieNotFoundException;
 import com.md.movieappv2.model.Actor;
-import com.md.movieappv2.model.Director;
-import com.md.movieappv2.model.Movie;
-import com.md.movieappv2.model.Publisher;
 import com.md.movieappv2.repository.ActorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
