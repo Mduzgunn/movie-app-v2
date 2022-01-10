@@ -1,6 +1,7 @@
 package com.md.movieappv2;
 
 import com.md.movieappv2.dto.*;
+import com.md.movieappv2.dto.request.CreateActorRequest;
 import com.md.movieappv2.dto.request.CreateMovieRequest;
 import com.md.movieappv2.dto.request.UpdateMovieRequest;
 import com.md.movieappv2.model.*;
@@ -213,6 +214,14 @@ public class TestSupport {
 
     // ***actor
 
+
+    public CreateActorRequest generateCreateActorRequest() {
+        return new CreateActorRequest(
+            "firstname",
+            "lastname"
+        );
+    }
+
     public Actor generateActor() {
         return new Actor(
                 "id",
@@ -235,8 +244,8 @@ public class TestSupport {
         );
     }
 
-//    public List<ActorDto> generateActorDtoList() {
-//        return List.of(generateActorDto());
-//    }
+    public List<ActorDto> generateActorDtoList() {
+        return List.of(generateActorDto());
+    }
 
 }

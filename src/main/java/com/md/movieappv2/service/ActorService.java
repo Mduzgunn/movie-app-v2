@@ -1,18 +1,13 @@
 package com.md.movieappv2.service;
 
 import com.md.movieappv2.dto.ActorDto;
-import com.md.movieappv2.dto.MovieDto;
 import com.md.movieappv2.dto.converter.ActorDtoConverter;
 import com.md.movieappv2.dto.request.CreateActorRequest;
 import com.md.movieappv2.exception.ActorNotFoundException;
-import com.md.movieappv2.exception.MovieNotFoundException;
 import com.md.movieappv2.model.Actor;
-import com.md.movieappv2.model.Movie;
 import com.md.movieappv2.repository.ActorRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,7 +34,7 @@ public class ActorService {
                 .orElse(List.of(
                         new Actor("id",
                                 "firstname",
-                                "")
+                                "lastname")
                 ));
     }
 
@@ -47,16 +42,16 @@ public class ActorService {
         return actorDtoConverter.convert(findActorById(id));
     }
 
-//    protected List<Actor> getAllActors() {
-//        return actorRepository.findAll();
-//    }
-
-    public List<ActorDto> getAllActors() {
-        return actorRepository.findAll()
-                .stream()
-                .map(actorDtoConverter::convert)
-                .collect(Collectors.toList());
+    protected List<Actor> getAllActors() {
+        return actorRepository.findAll();
     }
+
+//    public List<ActorDto> getAllActors() {
+//        return actorRepository.findAll()
+//                .stream()
+//                .map(actorDtoConverter::convert)
+//                .collect(Collectors.toList());
+//    }
 
 
     public ActorDto createActor(CreateActorRequest createActorRequest) {
@@ -74,7 +69,7 @@ public class ActorService {
     }
 
 
-//    public List<ActorDto> getAllActorDtoList() {
-//        return actorDtoConverter.convertToActorDtoList(getAllActors());
-//    }
+    public List<ActorDto> getAllActorDtoList() {
+        return actorDtoConverter.convertToActorDtoList(getAllActors());
+    }
 }

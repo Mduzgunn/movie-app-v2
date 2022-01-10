@@ -25,7 +25,7 @@ public class ActorController {
 
     @GetMapping
     public ResponseEntity<List<ActorDto>> getActors() {
-        List<ActorDto> actorDtoList = actorService.getAllActors();
+        List<ActorDto> actorDtoList = actorService.getAllActorDtoList();
         return ResponseEntity.ok(actorDtoList);
     }
 
