@@ -2,6 +2,7 @@ package com.md.movieappv2;
 
 import com.md.movieappv2.dto.*;
 import com.md.movieappv2.dto.request.CreateActorRequest;
+import com.md.movieappv2.dto.request.CreateDirectorRequest;
 import com.md.movieappv2.dto.request.CreateMovieRequest;
 import com.md.movieappv2.dto.request.UpdateMovieRequest;
 import com.md.movieappv2.model.*;
@@ -77,8 +78,8 @@ public class TestSupport {
     }
 
     public List<Movie> generateMovieList() {
-        Movie user = generateMovie();
-        return List.of(user);
+        Movie movie = generateMovie();
+        return List.of(movie);
     }
 
     public List<MovieDto> generateMovieDtoList() {
@@ -149,6 +150,24 @@ public class TestSupport {
                 "director lastname"
         );
     }
+
+    public List<Director> generateDirectorList() {
+        Director director = generateDirector();
+        return List.of(director);
+    }
+
+    public List<DirectorDto> generateDirectorDtoList() {
+        return List.of(generateDirectorDto());
+    }
+
+    public CreateDirectorRequest generateCreateDirectorRequest() {
+        return new CreateDirectorRequest(
+           "director name",
+           "director lastname"
+        );
+    }
+
+
 
     //***review
 

@@ -10,7 +10,6 @@ import com.md.movieappv2.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 @Service
