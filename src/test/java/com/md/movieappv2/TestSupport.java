@@ -88,12 +88,9 @@ public class TestSupport {
 
 
     public UpdateMovieRequest generateUpdateMovieRequest() {
-        Publisher publisher = generatePublisher();
-
         return new UpdateMovieRequest(
-                "media",
-                true,
-                publisher
+                "media2",
+                false
         );
     }
 
@@ -111,7 +108,7 @@ public class TestSupport {
                 getLocalDateTime(),
                 from.getActors(),
                 from.getDirector(),
-                updateMovieRequest.getPublisher(),
+                from.getPublisher(),
                 from.getReviews()
         );
     }

@@ -2,6 +2,7 @@ package com.md.movieappv2.controller;
 
 import com.md.movieappv2.dto.MovieDto;
 import com.md.movieappv2.dto.request.CreateMovieRequest;
+import com.md.movieappv2.dto.request.UpdateMovieRequest;
 import com.md.movieappv2.service.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,11 @@ public class MovieController {
     public ResponseEntity<MovieDto> getMovieById(@PathVariable String id) {
         MovieDto movieDto = movieService.getMovieById(id);
         return ResponseEntity.ok(movieDto);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<MovieDto> updateMovie(@PathVariable String id,@Valid @RequestBody UpdateMovieRequest updateMovieRequest) {
+        return ResponseEntity.ok(movieService.updateMovie(id, updateMovieRequest));
     }
 
     @DeleteMapping("/{id}")

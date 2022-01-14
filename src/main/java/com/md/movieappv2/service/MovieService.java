@@ -84,9 +84,8 @@ public class MovieService {
                 movie.getUpdatedDate(),
                 movie.getActors(),
                 movie.getDirector(),
-                Objects.requireNonNull(updateMovieRequest.getPublisher()),
+                movie.getPublisher(),
                 movie.getReviews()
-//                movie.getLanguage()
 
         );
         return movieDtoConverter.convert(movieRepository.save(updatedMovie));
