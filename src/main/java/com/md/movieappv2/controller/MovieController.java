@@ -1,8 +1,6 @@
 package com.md.movieappv2.controller;
 
-import com.md.movieappv2.dto.ActorDto;
 import com.md.movieappv2.dto.MovieDto;
-import com.md.movieappv2.dto.request.CreateActorRequest;
 import com.md.movieappv2.dto.request.CreateMovieRequest;
 import com.md.movieappv2.service.MovieService;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +30,7 @@ public class MovieController {
         return ResponseEntity.ok(movieDtoList);
     }
 
-    @GetMapping("/(id)")
+    @GetMapping("/{id}")
     public ResponseEntity<MovieDto> getMovieById(@PathVariable String id) {
         MovieDto movieDto = movieService.getMovieById(id);
         return ResponseEntity.ok(movieDto);

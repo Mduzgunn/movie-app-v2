@@ -29,7 +29,7 @@ public class ActorController {
         return ResponseEntity.ok(actorDtoList);
     }
 
-    @GetMapping("/(id)")
+    @GetMapping("/{id}")
     public ResponseEntity<ActorDto> getActorById(@PathVariable String id) {
         ActorDto actorDto = actorService.getActorById(id);
         return ResponseEntity.ok(actorDto);

@@ -33,7 +33,7 @@ public class DirectorController {
         return ResponseEntity.ok(directorDtoList);
     }
 
-    @GetMapping("/(id)")
+    @GetMapping("/{id}")
     public ResponseEntity<DirectorDto> getActorById(@PathVariable String id) {
         DirectorDto directorDto = directorService.getDirectorById(id);
         return ResponseEntity.ok(directorDto);
