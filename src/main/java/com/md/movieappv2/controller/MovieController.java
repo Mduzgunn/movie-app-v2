@@ -5,6 +5,7 @@ import com.md.movieappv2.dto.request.CreateMovieRequest;
 import com.md.movieappv2.dto.request.UpdateMovieRequest;
 import com.md.movieappv2.service.MovieService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
