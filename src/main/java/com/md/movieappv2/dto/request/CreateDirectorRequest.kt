@@ -5,5 +5,5 @@ import javax.validation.constraints.NotBlank
 data class CreateDirectorRequest(
         @field:NotBlank
         val name: String,
-        val lastname: String
+        val lastName: String
 )

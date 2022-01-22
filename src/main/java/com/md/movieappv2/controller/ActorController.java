@@ -2,6 +2,7 @@ package com.md.movieappv2.controller;
 
 import com.md.movieappv2.dto.ActorDto;
 import com.md.movieappv2.dto.request.CreateActorRequest;
+import com.md.movieappv2.dto.request.UpdateActorRequest;
 import com.md.movieappv2.service.ActorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/v2/actor")
 public class ActorController {
@@ -33,6 +35,11 @@ public class ActorController {
     public ResponseEntity<ActorDto> getActorById(@PathVariable String id) {
         ActorDto actorDto = actorService.getActorById(id);
         return ResponseEntity.ok(actorDto);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ActorDto> updateActor(@PathVariable String id, @Valid @RequestBody UpdateActorRequest updateActorRequest) {
+        return ResponseEntity.ok(actorService.updateActor(id, updateActorRequest));
     }
 
     @DeleteMapping("/{id}")

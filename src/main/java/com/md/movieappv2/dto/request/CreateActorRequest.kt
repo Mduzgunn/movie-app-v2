@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank
 data class CreateActorRequest(
 
         @field:NotBlank
-        val firstname: String,
-        val lastname: String
+        val firstName: String,
+        val lastName: String
 )
 

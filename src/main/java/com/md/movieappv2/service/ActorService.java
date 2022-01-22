@@ -3,6 +3,7 @@ package com.md.movieappv2.service;
 import com.md.movieappv2.dto.ActorDto;
 import com.md.movieappv2.dto.converter.ActorDtoConverter;
 import com.md.movieappv2.dto.request.CreateActorRequest;
+import com.md.movieappv2.dto.request.UpdateActorRequest;
 import com.md.movieappv2.exception.ActorNotFoundException;
 import com.md.movieappv2.model.Actor;
 import com.md.movieappv2.repository.ActorRepository;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ActorService {
@@ -46,21 +46,26 @@ public class ActorService {
         return actorRepository.findAll();
     }
 
-//    public List<ActorDto> getAllActors() {
-//        return actorRepository.findAll()
-//                .stream()
-//                .map(actorDtoConverter::convert)
-//                .collect(Collectors.toList());
-//    }
-
-
     public ActorDto createActor(CreateActorRequest createActorRequest) {
         Actor actor = new Actor(
-                createActorRequest.getFirstname(),
-                createActorRequest.getLastname()
+                createActorRequest.getFirstName(),
+                createActorRequest.getLastName()
         );
         return actorDtoConverter.convert(actorRepository.save(actor));
     }
+
+    public ActorDto updateActor(String id, UpdateActorRequest updateActorRequest) {
+        Actor actor = findActorById(id);
+
+        Actor updatedActor = new Actor(
+                actor.getId(),
+                updateActorRequest.getFirstName(),
+                updateActorRequest.getLastName(),
+                updateActorRequest.getMovieList()
+        );
+        return actorDtoConverter.convert(actorRepository.save(updatedActor));
+    }
+
 
     public String deleteActorById(String id) {
         getActorById(id);

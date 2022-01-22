@@ -33,7 +33,7 @@ public class DirectorService {
     public DirectorDto createDirector(CreateDirectorRequest createDirectorRequest) {
         Director director = new Director(
                 createDirectorRequest.getName(),
-                createDirectorRequest.getLastname()
+                createDirectorRequest.getLastName()
         );
         return directorDtoConverter.convert(directorRepository.save(director));
     }

@@ -1,9 +1,13 @@
 package com.md.movieappv2.service;
 
+import com.md.movieappv2.dto.ActorDto;
 import com.md.movieappv2.dto.PublisherDto;
 import com.md.movieappv2.dto.converter.PublisherDtoConverter;
 import com.md.movieappv2.dto.request.CreatePublisherRequest;
+import com.md.movieappv2.dto.request.UpdateActorRequest;
+import com.md.movieappv2.dto.request.UpdatePublisherRequest;
 import com.md.movieappv2.exception.PublisherNotFoundException;
+import com.md.movieappv2.model.Actor;
 import com.md.movieappv2.model.Publisher;
 import com.md.movieappv2.repository.PublisherRepository;
 import org.springframework.stereotype.Service;
@@ -43,6 +47,16 @@ public class PublisherService {
                 createPublisherRequest.getName()
         );
         return publisherDtoConverter.convert(publisherRepository.save(publisher));
+    }
+
+    public PublisherDto updatePublisher(String id, UpdatePublisherRequest updatePublisherRequest) {
+        Publisher publisher = findPublisherById(id);
+
+        Publisher updatedPublisher = new Publisher(
+                publisher.getId(),
+                updatePublisherRequest.getName()
+        );
+        return publisherDtoConverter.convert(publisherRepository.save(updatedPublisher));
     }
 
     public String deletePublisherById(String id) {
