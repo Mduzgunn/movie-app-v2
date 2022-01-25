@@ -19,7 +19,7 @@ public class ActorDtoConverter {
                 from.getId(),
                 from.getFirstName(),
                 from.getLastName(),
-                getMovieList(new ArrayList<>(Objects.requireNonNull(from.getMovies())))
+                getMovieList(new ArrayList<>((from.getMovie())))
         );
     }
 

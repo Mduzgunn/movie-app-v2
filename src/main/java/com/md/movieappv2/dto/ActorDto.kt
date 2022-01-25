@@ -7,5 +7,5 @@ data class ActorDto @JvmOverloads constructor(
         val firstName: String,
         val lastName:String,
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
-        val movieList: List<MovieDto>? = ArrayList()
+        val movie: List<MovieDto>? = ArrayList()
 )

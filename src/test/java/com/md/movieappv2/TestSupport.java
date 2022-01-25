@@ -90,7 +90,8 @@ public class TestSupport {
     public UpdateMovieRequest generateUpdateMovieRequest() {
         return new UpdateMovieRequest(
                 "media2",
-                false
+                false,
+                List.of("")
         );
     }
 

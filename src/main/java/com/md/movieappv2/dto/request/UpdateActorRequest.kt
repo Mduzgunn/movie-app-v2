@@ -1,10 +1,13 @@
 package com.md.movieappv2.dto.request
 
-import com.md.movieappv2.dto.MovieDto
 import com.md.movieappv2.model.Movie
+import com.sun.istack.Nullable
 
 data class UpdateActorRequest(
+    @Nullable
     val firstName: String?,
+    @Nullable
     val lastName: String?,
-    val movieList: List<Movie>?
+    @Nullable
+    val movieIds: List<String>?
 )

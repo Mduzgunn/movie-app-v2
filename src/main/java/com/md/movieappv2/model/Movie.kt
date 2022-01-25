@@ -46,13 +46,6 @@ data class Movie @JvmOverloads constructor(
                 inverseJoinColumns = [JoinColumn(name = "review_id", referencedColumnName = "review_id")]
         )
         val reviews: List<Review>?=ArrayList(),
-
-
-//        @field:ElementCollection(fetch = FetchType.EAGER)
-//        val language: List<Language>,
-
-
-
         )
 
 enum class Genre {

@@ -28,7 +28,7 @@ public class ActorService {
                 .orElseThrow(() -> new ActorNotFoundException("actor not found " + id));
     }
 
-    protected List<Actor> getActorList(List<String> idList) {
+    protected List<Actor> getActorListByIdList(List<String> idList) {
         return Optional.of(actorRepository.findAllByIdIn(idList))
                 .filter(a -> !a.isEmpty())
                 .orElse(List.of(
@@ -60,8 +60,7 @@ public class ActorService {
         Actor updatedActor = new Actor(
                 actor.getId(),
                 updateActorRequest.getFirstName(),
-                updateActorRequest.getLastName(),
-                updateActorRequest.getMovieList()
+                updateActorRequest.getLastName()
         );
         return actorDtoConverter.convert(actorRepository.save(updatedActor));
     }

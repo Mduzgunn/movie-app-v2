@@ -49,7 +49,7 @@ public class MovieService {
     }
 
     public MovieDto createMovie(CreateMovieRequest createMovieRequest) {
-        List<Actor> actorList = new ArrayList<>(actorService.getActorList(createMovieRequest.getActors()));
+        List<Actor> actorList = new ArrayList<>(actorService.getActorListByIdList(createMovieRequest.getActors()));
         Director director = directorService.findDirectorById(createMovieRequest.getDirector());
         Publisher publisher = publisherService.findPublisherById(createMovieRequest.getPublisherId());
 
@@ -82,7 +82,7 @@ public class MovieService {
                 movie.getGenre(),
                 movie.getCreationDate(),
                 movie.getUpdatedDate(),
-                movie.getActors(),
+                actorService.getActorListByIdList(updateMovieRequest.getActorIds()),
                 movie.getDirector(),
                 movie.getPublisher(),
                 movie.getReviews()

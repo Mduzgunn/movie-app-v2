@@ -104,7 +104,7 @@ class MovieServiceTest extends TestSupport {
 
         verify(directorService).findDirectorById("directorId");
         verify(publisherService).findPublisherById("publisherId");
-        verify(actorService).getActorList(Collections.singletonList("actorId1"));
+        verify(actorService).getActorListByIdList(Collections.singletonList("actorId1"));
         verify(movieDtoConverter).convert(movieRepository.save(movie));
     }
 
