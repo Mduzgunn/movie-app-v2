@@ -27,8 +27,6 @@ public class MovieDtoConverter {
                 new DirectorDto(from.getDirector().getId(),
                         from.getDirector().getName(),
                         from.getDirector().getLastName()),
-
-                // TODO - id?
                 from.getPublisher().getName(),
                 getReviewList(new ArrayList<>(from.getReviews()))
 //                from.getLanguage()

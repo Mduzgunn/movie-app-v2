@@ -49,7 +49,7 @@ public class MovieService {
     }
 
     public MovieDto createMovie(CreateMovieRequest createMovieRequest) {
-        List<Actor> actorList = new ArrayList<>(actorService.getActorListByIdList(createMovieRequest.getActors()));
+        List<Actor> actorList = new ArrayList<>(actorService.getActorListByIdList(createMovieRequest.getActorIds()));
         Director director = directorService.findDirectorById(createMovieRequest.getDirector());
         Publisher publisher = publisherService.findPublisherById(createMovieRequest.getPublisherId());
 

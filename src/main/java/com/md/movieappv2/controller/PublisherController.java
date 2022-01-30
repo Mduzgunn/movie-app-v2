@@ -1,9 +1,7 @@
 package com.md.movieappv2.controller;
 
-import com.md.movieappv2.dto.ActorDto;
 import com.md.movieappv2.dto.PublisherDto;
 import com.md.movieappv2.dto.request.CreatePublisherRequest;
-import com.md.movieappv2.dto.request.UpdateActorRequest;
 import com.md.movieappv2.dto.request.UpdatePublisherRequest;
 import com.md.movieappv2.service.PublisherService;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/v2/publisher")
 public class PublisherController {

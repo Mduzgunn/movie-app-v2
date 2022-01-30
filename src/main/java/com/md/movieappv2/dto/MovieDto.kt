@@ -12,7 +12,7 @@ data class MovieDto @JvmOverloads constructor(
         val duration: Int,
         val media: String,
         val isActive: Boolean,
-        val genre: List<Genre>,
+        val genre: List<Genre>? = ArrayList(),
         val creationDate: LocalDateTime = LocalDateTime.now(),
         val updatedDate: LocalDateTime? =LocalDateTime.now(),
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
